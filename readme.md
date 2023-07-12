@@ -1,3 +1,101 @@
+Portfolio TaskList - Project Description
+
+This is the project README for the Tasklist portfolio project, written in JavaScript using Node.js and Yarn. The project consists of an application with the following functionalities:
+
+UserController
+store
+Method responsible for registering a new user. The function performs the following steps:
+
+Validates the input data using the Yup package to ensure that the name, email, and password meet the necessary requirements.
+Checks if the user already exists in the database based on the provided email. If it exists, returns an error indicating that the user already exists.
+Creates the user in the database using the User model with the properties name, email, and password.
+Returns the data of the created user, including the id, name, and email.
+update
+Method responsible for updating a user's data. The function performs the following steps:
+
+Validates the input data using the Yup package to ensure they meet the necessary requirements, including validation of the old password, new password, and password confirmation.
+Checks if the provided email is already being used by another user. If it is, returns an error indicating that the user already exists.
+Verifies if the provided old password corresponds to the user's current password. If it doesn't correspond, returns an error indicating that the password is incorrect.
+Updates the user's data with the provided information.
+Returns the updated user's data, including the id, name, and email.
+TaskController
+index
+Method responsible for retrieving all tasks associated with a specific user. The function performs the following steps:
+
+Fetches all tasks from the database that are associated with the provided user_id.
+Returns the found tasks.
+store
+Method responsible for creating a new task for a user. The function performs the following steps:
+
+Validates the input data using the Yup package to ensure that the task property is provided.
+Creates the task in the database, associating it with the provided user_id.
+Returns the created task.
+update
+Method responsible for updating task data. The function performs the following steps:
+
+Fetches the task based on the provided task_id.
+Checks if the task exists. If it doesn't exist, returns an error indicating that the task doesn't exist.
+Updates the task data with the provided information.
+Returns the updated task data.
+delete
+Method responsible for deleting a task. The function performs the following steps:
+
+Fetches the task based on the provided task_id.
+Checks if the task exists. If it doesn't exist, returns an error indicating that the task doesn't exist.
+Checks if the task's user_id corresponds to the provided req.UserId. If it doesn't correspond, returns an error indicating that the request is not authorized.
+Deletes the task from the database.
+Returns a success response.
+SessionController
+store
+Method responsible for authenticating a user and generating an access token. The function performs the following steps:
+
+Retrieves the provided email and password.
+Checks if the user exists in the database based on the provided email. If it doesn't exist, returns an error indicating that the user doesn't exist.
+Checks if the provided password corresponds to the user's password. If it doesn't correspond, returns an error indicating that the password is incorrect.
+Returns the authenticated user's data, including the id, name, and email, along with an access token generated using the jsonwebtoken package.
+Authentication Middleware
+Middleware responsible for verifying if an access token is valid. The function performs the following steps:
+
+Checks if the access token exists in the request header. If it doesn't exist, returns an error indicating that the token doesn't exist.
+Extracts the token from the provided string in the header.
+Verifies if the token is valid and decodes the information contained within it using the jsonwebtoken package.
+Stores the decoded user id in the req.userId property for later use.
+Calls the next middleware function or route.
+Authentication Configuration File (auth.js)
+File that contains the configuration used for generating the access token. Defines the secret key (secret) used to sign the token and the token's expiration time (expiresIn).
+
+Database Configuration File (database.js)
+File that contains the configuration used for connecting to the PostgreSQL database. Defines the dialect, host, username, password, database name, and additional table definition options.
+
+Database Connection File (database.js)
+File responsible for establishing the connection to the database and initializing the models. Performs the following steps:
+
+Creates an instance of Sequelize and establishes the connection to the database using the configuration defined in the database.js file.
+Initializes the models using the init method of each model and associates the relationships between them if any.
+Routes File (routes.js)
+File that defines the application routes. Contains the following routes:
+
+/users: Route for registering a new user. Uses the store method of the UserController.
+/sessions: Route for authenticating a user and generating an access token. Uses the store method of the SessionController.
+/users: Route for updating a user's data. Uses the update method of the UserController. Requires authentication.
+/tasks: Route for creating a new task for a user. Uses the store method of the TaskController. Requires authentication.
+/tasks: Route for retrieving all tasks of a user. Uses the index method of the TaskController. Requires authentication.
+/tasks/:task_id: Route for updating task data. Uses the update method of the TaskController. Requires authentication.
+/tasks/:task_id: Route for deleting a task. Uses the delete method of the TaskController. Requires authentication.
+Main File (index.js)
+Main file of the application. Creates an instance of the Express server, applies the middlewares, and defines the routes. Exports the server instance to be used in other modules.
+
+I hope this description is useful for understanding the project's functionalities. If you have any questions, feel free to ask.
+
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
 Portfólio TaskList - Descrição do Projeto
 Este é o README do projeto para o portfólio do Tasklist, projeto em JavaScript, utilizando Node.js e Yarn . O projeto consiste em uma aplicação que possui as seguintes funcionalidades:
 
